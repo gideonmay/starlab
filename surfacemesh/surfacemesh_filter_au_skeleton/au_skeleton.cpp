@@ -2,7 +2,10 @@
 
 #include "au_skeleton.h"
 #include "StarlabDrawArea.h"
-#include "SurfaceMeshTypes.h"
+//#include "SurfaceMeshTypes.h"
+#include "SurfaceMeshModel.h"
+#include "SurfaceMeshHelper.h"
+#include "SurfaceMeshPlugins.h"
 #include "SkeletonModel.h"
 #include "SkeletonHelper.h"
 

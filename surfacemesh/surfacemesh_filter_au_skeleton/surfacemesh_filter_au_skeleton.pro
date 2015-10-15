@@ -1,6 +1,7 @@
-load($$[STARLAB])
-load($$[SURFACEMESH])
-load($$[EIGEN])
+include($$[STARLAB])
+include($$[SURFACEMESH])
+include($$[EIGEN])
+include($$[NANOFLANN])
 StarlabTemplate(plugin)
 
 HEADERS += au_skeleton.h \

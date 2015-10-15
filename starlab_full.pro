@@ -40,7 +40,7 @@ SUBDIRS += surfacemesh/surfacemesh_filter_simplification
 SUBDIRS += surfacemesh/surfacemesh_filter_geoheat
 SUBDIRS += surfacemesh/surfacemesh_filter_ballpivoting
 #SUBDIRS += surfacemesh/surfacemesh_filter_au_skeleton
-#SUBDIRS += surfacemesh/filter_depthscanner
+SUBDIRS += surfacemesh/filter_depthscanner
 #--- Mode Plugins
 SUBDIRS += surfacemesh/surfacemesh_mode_info
 SUBDIRS += surfacemesh/surfacemesh_mode_arapdeform

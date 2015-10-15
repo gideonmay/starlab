@@ -32,19 +32,21 @@ win32{
 
 mac{
     # static library (Mac)
-    # INCLUDEPATH += $$PWD/include
-    # LIBS += -L$$PWD/lib/osx64
-    # LIBS += -lamd -lcamd -lccolamd -lcholmod -lcolamd -lcxsparse -lblas
-
-    # system libraries
-    !exists(/usr/local/lib/libcholmod.a) : error("install homebrew from the website 'brew.sh' then in the terminal run 'brew tap homebrew/science' and 'brew install suite-sparse'") 
-    !exists(/usr/lib/liblapack.dylib) : error("missing '/usr/lib/liblapack.dylib'") 
-    
-    INCLUDEPATH += /usr/local/include
-    LIBS *= -L/usr/local/lib
-    LIBS *= -lamd -lcamd -lccolamd -lcolamd -lcxsparse -lblas -lcholmod
+    INCLUDEPATH += $$PWD/include
+    LIBS += -L$$PWD/lib/osx64
+    LIBS += -lamd -lcamd -lccolamd -lcholmod -lcolamd -lcxsparse -lblas
     LIBS *= -L/usr/lib
     LIBS *= -llapack
+
+    # system libraries
+    #!exists(/usr/local/lib/libcholmod.a) : error("install homebrew from the website 'brew.sh' then in the terminal run 'brew tap homebrew/science' and 'brew install suite-sparse'")
+    #!exists(/usr/lib/liblapack.dylib) : error("missing '/usr/lib/liblapack.dylib'")
+    
+    #INCLUDEPATH += /usr/local/include
+    #LIBS *= -L/usr/local/lib
+    #LIBS *= -lamd -lcamd -lccolamd -lcolamd -lcxsparse -lblas -lcholmod
+    #LIBS *= -L/usr/lib
+    #LIBS *= -llapack
 }
 
 # ubuntu 32/64 bits: take them from the OS
