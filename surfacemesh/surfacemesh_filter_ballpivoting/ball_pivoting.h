@@ -3,7 +3,7 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 
-#pragma warning(disable:4267) // disable warnings on x64
+// #pragma warning(disable:4267) // disable warnings on x64
 
 #include "NanoKdTree.h"
 #include "SurfaceMeshHelper.h"
@@ -43,7 +43,7 @@ class BallPivoting{
 		v0(_v0), v1(_v1), v2(_v2), face(_face), active(true) 
 		{ assert(v0 != v1 && v1 != v2 && v0 != v2);}
 
-		const bool operator==(const FrontEdge& f) const
+		bool operator==(const FrontEdge& f) const
 		{ return ((v0 == f.v0) && (v1 == f.v1) && (v2 == f.v2) && (face == f.face)); }
 	};  
 	enum ListID {FRONT,DEADS};
@@ -311,8 +311,8 @@ protected:
 
 		assert(v2 != v0 && v2 != v1);  
 
-		if ((touch.first == FRONT) && (touch.second != front.end()) ||
-			(touch.first == DEADS) && (touch.second != deads.end()))
+		if (((touch.first == FRONT) && (touch.second != front.end())) ||
+			((touch.first == DEADS) && (touch.second != deads.end())))
 
 		{  
 			//check for orientation and manifoldness    
@@ -390,8 +390,8 @@ protected:
 
 
 		} 
-		else if ((touch.first == FRONT) && (touch.second == front.end()) || 
-			(touch.first == DEADS) && (touch.second == deads.end()))
+		else if (((touch.first == FRONT) && (touch.second == front.end())) || 
+			((touch.first == DEADS) && (touch.second == deads.end())))
 		{
 			Vertex vv2 (v2);
 

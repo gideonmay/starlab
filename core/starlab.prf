@@ -181,14 +181,14 @@ defineTest(StarlabTemplate){
     }
 
     # OpenMP
-    win32{
-        QMAKE_CXXFLAGS *= /openmp
-        QMAKE_CXXFLAGS *= /MP
-    }
-    unix:!mac{
-        QMAKE_CXXFLAGS *= -fopenmp
-        LIBS += -lgomp
-    }
+#    win32{
+#        QMAKE_CXXFLAGS *= /openmp
+#        QMAKE_CXXFLAGS *= /MP
+#    }
+#    unix:!mac{
+#        QMAKE_CXXFLAGS *= -fopenmp
+#        LIBS += -lgomp
+#    }
 
     # Windows specific warnings + compilation issues
     win32{

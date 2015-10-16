@@ -186,9 +186,9 @@ public:
 
 		this->center = (vmin + vmax) / 2.0;
 
-		this->xExtent = fabs(vmax.x() - center.x());
-		this->yExtent = fabs(vmax.y() - center.y());
-		this->zExtent = fabs(vmax.z() - center.z());
+		this->xExtent = std::abs(vmax.x() - center.x());
+		this->yExtent = std::abs(vmax.y() - center.y());
+		this->zExtent = std::abs(vmax.z() - center.z());
 	}
 
     std::vector<Eigen::Vector3d> getCorners()
@@ -313,32 +313,32 @@ public:
         Eigen::Vector3d wCrossD = cross(ray.direction , diff);
 
 		fWdU[0] = dot(ray.direction , UNIT_X);
-		fAWdU[0] = fabs(fWdU[0]);
+		fAWdU[0] = std::abs(fWdU[0]);
 		fDdU[0] = dot(diff , UNIT_X);
-		fADdU[0] = fabs(fDdU[0]);
+		fADdU[0] = std::abs(fDdU[0]);
 		if (fADdU[0] > xExtent && fDdU[0] * fWdU[0] >= 0.0)		return false;
 
 		fWdU[1] = dot(ray.direction , UNIT_Y);
-		fAWdU[1] = fabs(fWdU[1]);
+		fAWdU[1] = std::abs(fWdU[1]);
 		fDdU[1] = dot(diff , UNIT_Y);
-		fADdU[1] = fabs(fDdU[1]);
+		fADdU[1] = std::abs(fDdU[1]);
 		if (fADdU[1] > yExtent && fDdU[1] * fWdU[1] >= 0.0)		return false;
 
 		fWdU[2] = dot(ray.direction , UNIT_Z);
-		fAWdU[2] = fabs(fWdU[2]);
+		fAWdU[2] = std::abs(fWdU[2]);
 		fDdU[2] = dot(diff , UNIT_Z);
-		fADdU[2] = fabs(fDdU[2]);
+		fADdU[2] = std::abs(fDdU[2]);
 		if (fADdU[2] > zExtent && fDdU[2] * fWdU[2] >= 0.0)		return false;
 
-		fAWxDdU[0] = fabs(dot(wCrossD , UNIT_X));
+		fAWxDdU[0] = std::abs(dot(wCrossD , UNIT_X));
 		rhs = yExtent * fAWdU[2] + zExtent * fAWdU[1];
 		if (fAWxDdU[0] > rhs)		return false;
 
-		fAWxDdU[1] = fabs(dot(wCrossD , UNIT_Y));
+		fAWxDdU[1] = std::abs(dot(wCrossD , UNIT_Y));
 		rhs = xExtent * fAWdU[2] + zExtent * fAWdU[0];
 		if (fAWxDdU[1] > rhs)		return false;
 
-		fAWxDdU[2] = fabs(dot(wCrossD , UNIT_Z));
+		fAWxDdU[2] = std::abs(dot(wCrossD , UNIT_Z));
 		rhs = xExtent * fAWdU[1] + yExtent * fAWdU[0];
 		if (fAWxDdU[2] > rhs)		return false;
 
@@ -378,21 +378,21 @@ public:
 		
 		/* Bullet 3:  */
 		/*  test the 9 tests first (this was faster) */
-		fex = fabsf(e0[X]);
-		fey = fabsf(e0[Y]);
-		fez = fabsf(e0[Z]);
+		fex = std::abs(e0[X]);
+		fey = std::abs(e0[Y]);
+		fez = std::abs(e0[Z]);
 		AXISTEST_X01(e0[Z], e0[Y], fez, fey);
 		AXISTEST_Y02(e0[Z], e0[X], fez, fex);
 		AXISTEST_Z12(e0[Y], e0[X], fey, fex);
-		fex = fabsf(e1[X]);
-		fey = fabsf(e1[Y]);
-		fez = fabsf(e1[Z]);
+		fex = std::abs(e1[X]);
+		fey = std::abs(e1[Y]);
+		fez = std::abs(e1[Z]);
 		AXISTEST_X01(e1[Z], e1[Y], fez, fey);
 		AXISTEST_Y02(e1[Z], e1[X], fez, fex);
 		AXISTEST_Z0(e1[Y], e1[X], fey, fex);
-		fex = fabsf(e2[X]);
-		fey = fabsf(e2[Y]);
-		fez = fabsf(e2[Z]);
+		fex = std::abs(e2[X]);
+		fey = std::abs(e2[Y]);
+		fez = std::abs(e2[Z]);
 		AXISTEST_X2(e2[Z], e2[Y], fez, fey);
 		AXISTEST_Y1(e2[Z], e2[X], fez, fex);
 		AXISTEST_Z12(e2[Y], e2[X], fey, fex);
@@ -435,9 +435,9 @@ public:
 
     bool intersectsSphere( const Eigen::Vector3d& sphere_center, double radius )
 	{
-		if (fabs(center.x() - sphere_center.x()) < radius + xExtent
-			&& fabs(center.y() - sphere_center.y()) < radius + yExtent
-			&& fabs(center.z() - sphere_center.z()) < radius + zExtent)
+		if (std::abs(center.x() - sphere_center.x()) < radius + xExtent
+			&& std::abs(center.y() - sphere_center.y()) < radius + yExtent
+			&& std::abs(center.z() - sphere_center.z()) < radius + zExtent)
 			return true;
 
 		return false;
@@ -445,9 +445,9 @@ public:
 
     bool contains( const Eigen::Vector3d& point ) const
 	{
-		return fabs(center.x() - point.x()) < xExtent
-			&& fabs(center.y() - point.y()) < yExtent
-			&& fabs(center.z() - point.z()) < zExtent;
+		return std::abs(center.x() - point.x()) < xExtent
+			&& std::abs(center.y() - point.y()) < yExtent
+			&& std::abs(center.z() - point.z()) < zExtent;
 	}
 
     Eigen::Vector3d Center()
